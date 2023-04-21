@@ -1,0 +1,38 @@
+new Vue({
+  el: "#app",
+  data: {
+    newProduct: {
+      name: "",
+      receiptDate: "",
+      quantity: "",
+      unitPrice: ""
+    },
+    productList: []
+  },
+  methods: {
+    addProduct() {
+      this.productList.push({
+        name: this.newProduct.name,
+        receiptDate: this.newProduct.receiptDate,
+        quantity: this.newProduct.quantity,
+        unitPrice: this.newProduct.unitPrice
+      });
+      this.newProduct.name = "";
+      this.newProduct.receiptDate = "";
+      this.newProduct.quantity = "";
+      this.newProduct.unitPrice = "";
+    },
+    removeProduct(index) {
+      this.productList.splice(index, 1);
+    }
+  },
+  computed: {
+    totalAmount() {
+      let total = 0;
+      for (let i = 0; i < this.productList.length; i++) {
+        total += this.productList[i].quantity * this.productList[i].unitPrice;
+      }
+      return total;
+    }
+  }
+});
